@@ -13,6 +13,7 @@ describe('TripsService', () => {
     }).compile();
 
     service = module.get<TripsService>(TripsService);
+    jest.clearAllMocks();
   });
 
   it('should calculate duration correctly', async () => {
@@ -77,5 +78,21 @@ describe('TripsService', () => {
     } as any);
 
     expect(mock.mock.calls.length).toBe(2);
+  }, 50000);
+
+  it('should fail if policy cannot be fetched', async () => {
+    const mock = jest
+      .spyOn(service.policyService, 'get')
+      .mockImplementation(async (userId) => {
+        throw AxiosError;
+      });
+    await expect(
+      service.create({
+        userId: 100, // ID of the user who performed a trip
+        tripStart: '2022-09-08T11:40:00.000Z', // ISO 8601 string
+        tripEnd: '2022-09-08T12:40:00.000Z', // ISO 8601 string
+        distance: 85.7, // Distance in kilometers
+      } as any),
+    ).rejects.toThrowError();
   }, 50000);
 });

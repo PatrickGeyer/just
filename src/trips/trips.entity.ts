@@ -5,7 +5,7 @@ import { Table, Column, Model } from 'sequelize-typescript';
     {
       name: 'unique_index',
       unique: true,
-      fields: ['userId', 'tripStart'],
+      fields: ['userId', 'tripStart', 'tripEnd', 'distance'],
     },
   ],
 })

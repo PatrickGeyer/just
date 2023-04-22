@@ -35,9 +35,6 @@ $ npm run test
 
 # e2e tests
 $ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ## Considerations
@@ -45,3 +42,4 @@ $ npm run test:cov
 - Would write stub services for external policy and notification endpoints.
 - Injected a logger instead of using console.log/debug
 - Error handling queue would be implemented
+- Error descriptions (e.g. on duplicate trip submit) would be accurate, rather than generic 500 error
